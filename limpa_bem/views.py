@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from django.db import transaction
 from django.db.models import Q, Sum
 from django.http import JsonResponse
@@ -132,3 +133,13 @@ def atualizar_atendimento(request, atendimento_id):
 def index(request):
     return render(request, 'index.html')
 
+def login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid credentials'})

@@ -1,9 +1,14 @@
 
 from django.contrib import admin
+# from django.contrib.auth import login
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 from django.urls import path
 
 from limpa_bem.views import cadastrar_servico, cadastrar_atendimento, cadastrar_usuario, listar_atendimentos, \
-    atualizar_atendimento, consultar_atendimento, listar_servicos, relatorio_valor_total, agendar_atendimento, index
+    atualizar_atendimento, consultar_atendimento, listar_servicos, relatorio_valor_total, agendar_atendimento, index, login
 
 urlpatterns = [
     path('/', admin.site.urls),
@@ -16,6 +21,9 @@ urlpatterns = [
     path('servico/listagem/', listar_servicos, name='listar_servico'),
     path('atendimento/<int:atendimento_id>/consultar/',consultar_atendimento, name='consultar_atendimento'),
     path('atendimento/<int:atendimento_id>/atualizar/',atualizar_atendimento, name='atualizar_atendimento'),
-    path('', index)
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('', index),
+    path('login/', login, name='login'),
 
 ]
