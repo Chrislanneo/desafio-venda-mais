@@ -131,3 +131,4 @@ def atualizar_atendimento(request, atendimento_id):
 
 def index(request):
     return render(request, 'index.html')
+
