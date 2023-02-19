@@ -1,21 +1,19 @@
-"""setup URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
+from limpa_bem.views import cadastrar_servico, cadastrar_atendimento, cadastrar_usuario, listar_atendimentos, \
+    atualizar_atendimento, consultar_atendimento, listar_servicos, relatorio_valor_total, agendar_atendimento, index
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
+    path('servicos/', cadastrar_servico, name='cadastrar_servico'),
+    path('atendimento/', cadastrar_atendimento, name='cadastrar_atendimento'),
+    path('atendimento/agendar', agendar_atendimento, name='cadastrar_atendimento'),
+    path('usuario/', cadastrar_usuario, name='cadastrar_usuario'),
+    path('atendimento/relatorio/lista-atendimentos/', listar_atendimentos, name='listar_atendimentos'),
+    path('atendimento/relatorio/valor-total/', relatorio_valor_total, name='relatorio-valor-total'),
+    path('servico/listagem/', listar_servicos, name='listar_servico'),
+    path('atendimento/<int:atendimento_id>/consultar/',consultar_atendimento, name='consultar_atendimento'),
+    path('atendimento/<int:atendimento_id>/atualizar/',atualizar_atendimento, name='atualizar_atendimento'),
+
 ]
